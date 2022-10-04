@@ -108,10 +108,10 @@ for track in recently_played['items']:
             'artist_id': artist['id'],
             'name': artist['name'],
             'genres': artist_result['genres'],
-            #'followers': artist_result['followers']['total'], > muda com o tempo
-            #'popularity': artist_result['popularity'], > muda com o tempo
+            #'followers': artist_result['followers']['total'], > changes with time
+            #'popularity': artist_result['popularity'], > changes with time
             'url': artist['external_urls']['spotify'],
-            #'images': artist_result['images'] > podem mudar com o tempo também! Como salvar? Collection com imagem, followers, popularity e data em que tudo foi salvo?
+            #'images': artist_result['images'] > can change with time?
         }
         artists_list.append(artist_dict)
         sleep(0.1)
@@ -160,7 +160,7 @@ if collection_list == []:
 for col_name in collection_list:
     collection = spotify_db[col_name]
     if col_name == 'history':
-        results_list = list(collection.find({},{'_id':0}).sort("played_at.full",-1).limit(50)) # descending
+        results_list = list(collection.find({},{'_id':0}).sort("played_at.full",-1).limit(50))
 
     else:
         results_list = list(collection.find({},{'_id':0}))
